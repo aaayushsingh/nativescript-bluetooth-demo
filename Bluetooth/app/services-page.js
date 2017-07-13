@@ -17,6 +17,9 @@ function pageLoaded(args) {
   console.log("--- page.navigationContext: " + page.navigationContext);
   
   _peripheral = page.navigationContext.peripheral;
+  // console.dir("----------------------------------------------------------------");
+  // console.dir(_peripheral);
+  // console.dir("----------------------------------------------------------------");
   _peripheral.services = new observableArray.ObservableArray();
   page.bindingContext = _peripheral;
   _peripheral.set('isLoading', true);

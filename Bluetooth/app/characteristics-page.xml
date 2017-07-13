@@ -6,10 +6,13 @@
       <Label text="{{ feedback }}" cssClass="characteristic-feedback" textWrap="true" />                
       <Label text="{{ feedbackRaw || 'Tap any row below ..' }}" cssClass="characteristic-feedback-raw" textWrap="true" />                
       <Label text="{{ feedbackTimestamp }}" cssClass="characteristic-feedback-timestamp" />
+      <Label text="{{ notifData || 'notifying data' }}" cssClass="characteristic-feedback-raw" textWrap="true" />
+      <Label text="{{ moreData || 'more data' }}" cssClass="characteristic-feedback-raw" textWrap="true" />
+
     </StackLayout>
 
     <GridLayout rows="*">
-      <ListView items="{{ characteristics }}" itemTap="onCharacteristicTap" separatorColor="#90c3d4">
+      <ListView items="{{ characteristics }}" separatorColor="#90c3d4">
           <ListView.itemTemplate>
             <StackLayout col="0" orientation="vertical" cssClass="padded-label">
                 <Label text="{{ name }}" />

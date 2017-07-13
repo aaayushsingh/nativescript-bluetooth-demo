@@ -1,17 +1,6 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded">
   <TabView>
     <TabView.items>
-      <TabViewItem title="About">
-        <TabViewItem.view>
-          <ScrollView>
-            <StackLayout cssClass="tab-content">
-              <Image margin="10" src="~/res/telerik-logo.png" />
-              <Label text="Bluetooth plugin demo" cssClass="title"/>
-              <Label text="The Bluetooth plugin allows your app to scan for Bluetooth LE devices. Once found you can connect to a peripheral and read values. You can also write values and get notified when a value changes." textWrap="true"/>
-            </StackLayout>
-          </ScrollView>
-        </TabViewItem.view>
-      </TabViewItem>
       <TabViewItem title="Demo">
         <TabViewItem.view>
           <StackLayout>
@@ -21,6 +10,7 @@
                 <Button row="2" col="0" text="any peripheral" tap="{{ doStartScanning }}" cssClass="button button-neutral" />
                 <Button row="2" col="1" text="a heartrate monitor" tap="{{ doScanForHeartrrateMontitor }}" cssClass="button button-neutral" />
                 <Button row="3" colSpan="2" text="stop scan" tap="{{ doStopScanning }}" cssClass="button button-danger" />
+                <Label row="4" text="{{ hexor }}" cssClass="title" textWrap="true" />
               </GridLayout>
               <ActivityIndicator busy="{{ isLoading }}" />
               <GridLayout rows="*">
@@ -40,6 +30,18 @@
                   </ListView>
               </GridLayout>
           </StackLayout>
+        </TabViewItem.view>
+      </TabViewItem>
+      <TabViewItem title="About">
+        <TabViewItem.view>
+          <ScrollView>
+            <StackLayout cssClass="tab-content">
+              <Image margin="10" src="~/res/telerik-logo.png" />
+              <Label text="Bluetooth plugin demo" cssClass="title"/>
+              <Label text="this is tab demo" textWrap="true"/>
+              <Label text="{{ hexor }}" textWrap="true" />
+            </StackLayout>
+          </ScrollView>
         </TabViewItem.view>
       </TabViewItem>
     </TabView.items>

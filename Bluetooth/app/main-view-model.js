@@ -19,6 +19,22 @@ var DemoAppModel = (function (_super) {
     });
   };
 
+  function doFind(peri){
+    console.log("miss me?");
+    // var navigationEntry = {
+    //   moduleName: "services-page",
+    //   context: {
+    //     info: "something you want to pass to your page",
+    //     foo: 'bar',
+    //     peripheral: peri
+    //   },
+    //   animated: true
+    // };
+    // var topmost = frameModule.topmost();
+    // topmost.navigate(navigationEntry);
+
+  }
+
   var observablePeripheralArray = new observableArray.ObservableArray();
 
   DemoAppModel.prototype.peripherals = observablePeripheralArray;
@@ -28,6 +44,32 @@ var DemoAppModel = (function (_super) {
     console.log('!!&&&&***** Clicked item with index ' + index);
     var peri = DemoAppModel.prototype.peripherals.getItem(index);
     console.log("--- peri selected: " + peri.UUID);
+    //console.dir(peri);
+    
+
+
+//     bluetooth.connect(
+//     {
+//       UUID: _peripheral.UUID,
+//       // NOTE: we could just use the promise as this cb is only invoked once
+//       onConnected: function (peripheral) {
+//         console.log("------- Peripheral connected: " + JSON.stringify(peripheral));
+//         peripheral.services.forEach(function(value) {
+//           console.log("---- ###### adding service: " + value.UUID);
+//           _peripheral.services.push(value);
+//         });
+//         _peripheral.set('isLoading', false);
+//       },
+//       onDisconnected: function (peripheral) {
+//         dialogs.alert({
+//           title: "Disconnected",
+//           message: "Disconnected from peripheral: " + JSON.stringify(peripheral),
+//           okButtonText: "OK, thanks"
+//         });
+//       }
+//     }
+//   );
+// }
 
     var navigationEntry = {
       moduleName: "services-page",
@@ -42,45 +84,45 @@ var DemoAppModel = (function (_super) {
     topmost.navigate(navigationEntry);
   };
 
-  DemoAppModel.prototype.doScanForHeartrrateMontitor = function () {
-    var that = this;
+  // DemoAppModel.prototype.doScanForHeartrrateMontitor = function () {
+  //   var that = this;
 
-     bluetooth.hasCoarseLocationPermission().then(
-      function(granted) {
-        if (!granted) {
-          bluetooth.requestCoarseLocationPermission();
-        } else {
-          var heartrateService = "180d";
-          var omegaService = "12345678-9012-3456-7890-1234567890ee";
+  //    bluetooth.hasCoarseLocationPermission().then(
+  //     function(granted) {
+  //       if (!granted) {
+  //         bluetooth.requestCoarseLocationPermission();
+  //       } else {
+  //         var heartrateService = "180d";
+  //         var omegaService = "12345678-9012-3456-7890-1234567890ee";
 
-          that.set('isLoading', true);
-          // reset the array
-          observablePeripheralArray.splice(0, observablePeripheralArray.length); 
-          bluetooth.startScanning(
-            {
-              // beware: the peripheral must advertise ALL these services
-              serviceUUIDs: [heartrateService],
-              seconds: 4,
-              onDiscovered: function (peripheral) {
-                var obsp = new observable.Observable(peripheral);
-                observablePeripheralArray.push(obsp);
-              }
-            }
-          ).then(function() {
-            that.set('isLoading', false);
-          },
-          function (err) {
-            that.set('isLoading', false);
-            dialogs.alert({
-              title: "Whoops!",
-              message: err,
-              okButtonText: "OK, got it"
-            });
-          });
-        }
-      }
-     );
-  };
+  //         that.set('isLoading', true);
+  //         // reset the array
+  //         observablePeripheralArray.splice(0, observablePeripheralArray.length); 
+  //         bluetooth.startScanning(
+  //           {
+  //             // beware: the peripheral must advertise ALL these services
+  //             serviceUUIDs: [heartrateService],
+  //             seconds: 4,
+  //             onDiscovered: function (peripheral) {
+  //               var obsp = new observable.Observable(peripheral);
+  //               observablePeripheralArray.push(obsp);
+  //             }
+  //           }
+  //         ).then(function() {
+  //           that.set('isLoading', false);
+  //         },
+  //         function (err) {
+  //           that.set('isLoading', false);
+  //           dialogs.alert({
+  //             title: "Whoops!",
+  //             message: err,
+  //             okButtonText: "OK, got it"
+  //           });
+  //         });
+  //       }
+  //     }
+  //    );
+  // };
 
   DemoAppModel.prototype.doStartScanning = function () {
     var that = this;
@@ -99,6 +141,14 @@ var DemoAppModel = (function (_super) {
               serviceUUIDs: [], // pass an empty array to scan for all services
               seconds: 4, // passing in seconds makes the plugin stop scanning after <seconds> seconds
               onDiscovered: function (peripheral) {
+                if(peripheral.name=="Electronic Scale"){
+                    //doFind(peripheral);
+                    //console.dir(peripheral);
+                    //kuchNameSochLe();
+                      
+                } else {
+                  console.log("Name Error");
+                }
                 var obsp = new observable.Observable(peripheral);
                 observablePeripheralArray.push(obsp);
               }
